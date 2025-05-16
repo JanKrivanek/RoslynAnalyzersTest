@@ -1,0 +1,12 @@
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
+[*]
+csharp_style_namespace_declarations = file_scoped
+
+# IDE
+dotnet_diagnostic.IDE0007.severity = warning # Use 'var' instead of explicit type
+dotnet_diagnostic.IDE0008.severity = none    # Enforce that the explicit types are used (the contrary of IDE0007)
+dotnet_diagnostic.IDE0055.severity = warning # Formatting rule, affects indentation, spaces, and new lines
+dotnet_diagnostic.IDE0160.severity = none    # Use block-scoped namespace
+dotnet_diagnostic.IDE0161.severity = warning # Use file-scoped namespace
