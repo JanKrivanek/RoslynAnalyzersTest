@@ -17,6 +17,10 @@ internal static class GetDiags
     {
         string testProjectPath = Path.Combine(Directory.GetParent(Path.GetDirectoryName(sourceFilePath)).FullName,
             "AnalyzedProj", "FailedDiagsTst.csproj");
+
+        Environment.SetEnvironmentVariable("MSBUILDDEBUGENGINE", "1");
+        Environment.SetEnvironmentVariable("MSBUILDDEBUGPATH", "C:\\ReproBinlogs");
+
         await RunInternal(testProjectPath, CancellationToken.None);
     }
 
@@ -58,7 +62,7 @@ internal static class GetDiags
         Project project, CancellationToken cancellationToken)
     {
         return await compilation
-            .WithAnalyzers([..project.AnalyzerReferences.SelectMany(ar => ar.GetAnalyzers(project.Language))])
+            .WithAnalyzers([..project.AnalyzerReferences.SelectMany(ar => ar.GetAnalyzers(project.Language))], project.AnalyzerOptions)
             .GetAnalyzerDiagnosticsAsync(cancellationToken);
     }
 }
